@@ -36,7 +36,7 @@ const scrollHandle = ({ target }) => {
   const navHeight = document.querySelector('.navbar-anchor').offsetHeight
   for (let i = len - 1; i >= 0; i--) {
     const curReference = offsetTopList[i].offsetTop // 当前参考值
-    if (flag && curScrollTop >= curReference - navHeight * 2) {
+    if (flag && curScrollTop >= curReference - navHeight) {
       flag = false
       navbarStore.setAnchor(offsetTopList[i].anchor)
       changeNav = i > 0;
