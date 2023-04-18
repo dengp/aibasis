@@ -80,6 +80,7 @@ onUnmounted(() => {
     </div>
     <div class="content" id="about">
       <h2>ABOUT</h2>
+      <div class="title_under_line"></div>
       <p>
         AIbasis was established in 2018 by Ming Lei, one of the founding members of Baidu. AIbasis is a Singapore-based,
         pre-seed, seed stage fund that focuses on emerging technologies.</p>
@@ -97,12 +98,15 @@ onUnmounted(() => {
     </div>
     <div class="content" id="team">
       <h2>TEAM</h2>
+      <div class="title_under_line"></div>
     </div>
     <div class="content" id="portfolio">
       <h2>PORTFOLIO</h2>
+      <div class="title_under_line"></div>
     </div>
     <div class="content" id="cooperation">
       <h2>COOPERATION</h2>
+      <div class="title_under_line"></div>
     </div>
   </div>
 </template>
@@ -135,7 +139,8 @@ onUnmounted(() => {
       font-size: 20px;
       position: relative;
       padding-bottom: 8px;
-
+      font-family: 'DINPro-Bold';
+      font-weight: bold;
       &:first-child {
         margin-left: 0;
       }
@@ -175,6 +180,17 @@ onUnmounted(() => {
     h2 {
       display: block;
       margin-top: 100px;
+      font-family: 'Helvetica Neue Bold';
+      font-size: 48px;
+      font-weight: bold;
+    }
+    
+    .title_under_line {
+      width: 50px;
+      height: 4px;
+      background: #4E62E8;
+      margin-top: 26px;
+      margin: 0 auto;
     }
 
     &#home {
@@ -190,11 +206,14 @@ onUnmounted(() => {
       p {
         text-align: left;
         font-size: 20px;
-        font-family: HelveticaNeue-Light, HelveticaNeue;
+        font-family: 'HelveticaNeue-Light';
         font-weight: 300;
         color: #212226;
         line-height: 32px;
         margin-top: 32px;
+        &:first-child {
+          margin-top: 42px;
+        }
       }
     }
   }
