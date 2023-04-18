@@ -36,7 +36,7 @@ const scrollHandle = ({ target }) => {
   const navHeight = document.querySelector('.navbar-anchor').offsetHeight
   for (let i = len - 1; i >= 0; i--) {
     const curReference = offsetTopList[i].offsetTop // 当前参考值
-    if (flag && curScrollTop >= curReference - navHeight) {
+    if (flag && curScrollTop >= curReference - navHeight * 2) {
       flag = false
       navbarStore.setAnchor(offsetTopList[i].anchor)
       changeNav = i > 0;
@@ -99,22 +99,43 @@ onUnmounted(() => {
     <div class="content" id="team">
       <h2>TEAM</h2>
       <div class="title_under_line"></div>
+      <div class="imgs">
+        <img src="@/assets/team_1.png" />
+        <img src="@/assets/team_2.png" />
+        <img src="@/assets/team_3.png" />
+        <img src="@/assets/team_4.png" />
+        <img src="@/assets/team_5.png" />
+        <img src="@/assets/team_6.png" />
+      </div>
     </div>
     <div class="content" id="portfolio">
       <h2>PORTFOLIO</h2>
       <div class="title_under_line"></div>
+      <div class="imgs">
+        <img src="@/assets/portfolio_1.png" />
+        <img src="@/assets/portfolio_2.png" />
+        <img src="@/assets/portfolio_3.png" />
+        <img src="@/assets/portfolio_4.png" />
+      </div>
     </div>
     <div class="content" id="cooperation">
       <h2>COOPERATION</h2>
       <div class="title_under_line"></div>
+      <img src="@/assets/cooperation.png" />
+    </div>
+  </div>
+  <div class="footer">
+    <div class="footer_content">
+      <p>contact US<span>EMAIL : MLIC@PKU.EDU.CN</span></p>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
+$mainContentPadding: 0 360px;
 .navbar-anchor {
   height: 102px;
-  padding: 0 360px;
+  padding: $mainContentPadding;;
   position: fixed;
   top: 0;
   left: 0;
@@ -172,14 +193,12 @@ onUnmounted(() => {
 
 .main-container {
   .content {
-    height: 1500px;
-    padding: 0 360px;
+    padding: $mainContentPadding;
     text-align: center;
     overflow: hidden;
 
     h2 {
       display: block;
-      margin-top: 100px;
       font-family: 'Helvetica Neue Bold';
       font-size: 48px;
       font-weight: bold;
@@ -196,13 +215,13 @@ onUnmounted(() => {
     &#home {
       height: auto;
       padding: 0;
-
       .banner {
         width: 100%;
       }
     }
 
     &#about {
+      padding-top: 100px;
       p {
         text-align: left;
         font-size: 20px;
@@ -214,6 +233,77 @@ onUnmounted(() => {
         &:first-child {
           margin-top: 42px;
         }
+      }
+    }
+
+    &#team {
+      padding-top: 120px;
+      .imgs {
+        margin-top: 49px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: center;
+        img {
+          width: 262px;
+          height: 182px;
+          width: 380px;
+          height: 380px;
+          margin-top: 30px;
+        }
+      }
+    }
+
+    &#portfolio {
+      margin-top: 120px;
+      padding-top: 100px;
+      padding-bottom: 99px;
+      background: #F0F2F7;
+      .imgs {
+        margin-top: 79px;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        img {
+          width: 262px;
+          height: 182px;
+        }
+      }
+    }
+
+    &#cooperation {
+      margin-top: 100px;
+      img {
+        width: 100%;
+        margin: 100px 0 130px 0;
+      }
+    }
+
+  }
+}
+
+.footer {
+  background: #4E62E8;
+  padding-bottom: 100px;
+  .footer_content {
+    height: 196px;
+    padding: $mainContentPadding;
+    background: #F0F2F7;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    p {
+      font-size: 20px;
+      font-family: 'HelveticaNeue';
+      color: #212226;
+      line-height: 24px;
+      span {
+        font-size: 20px;
+        font-family: 'HelveticaNeue-Bold, HelveticaNeue';
+        font-weight: bold;
+        color: #212226;
+        line-height: 25px;
+        margin-left: 39px;
       }
     }
   }
