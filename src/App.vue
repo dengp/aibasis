@@ -8,6 +8,7 @@ const anchorPosition = anchor => {
   navbarStore.anchorPosition(anchor)
 }
 
+let changeNav = false;
 let parent = null
 let offsetTopList = []
 
@@ -38,6 +39,7 @@ const scrollHandle = ({ target }) => {
     if (flag && curScrollTop >= curReference - navHeight) {
       flag = false
       navbarStore.setAnchor(offsetTopList[i].anchor)
+      changeNav = i > 0;
     }
   }
 }
@@ -60,23 +62,38 @@ onUnmounted(() => {
 })
 </script>
 <template>
-  <div class="navbar-anchor">
-    <img class="logo" src="@/assets/logo.png" />
+  <div class="navbar-anchor" :class="{ 'navbar-anchor_dark': changeNav }">
+    <img class="logo" :src="`/src/assets/logo${changeNav ? '_dark' : ''}.png`" @click="anchorPosition('#home')" />
     <ul class="navbar-anchor-list">
-      <li class="navbar-anchor-item" :class="{ active: item.anchor === navbarStore.anchor }"
+      <li class="navbar-anchor-item"
         v-for="(item, index) in navbarStore.anchorList" :key="index" @click="anchorPosition(item.anchor)">
         <a class="navbar-anchor-item-link">
           <span class="navbar-anchor-item-text">{{ item.text }}</span>
         </a>
+        <div class="under_line" :class="{ 'under_line_dark': changeNav }" v-if="item.anchor === navbarStore.anchor"></div>
       </li>
     </ul>
   </div>
   <div class="main-container" id="main">
     <div class="content" id="home">
-      <img class="banner" src="@/assets/banner.png" @load=" bannerLoaded()" />
+      <img class="banner" src="@/assets/banner.png" @load="bannerLoaded()" />
     </div>
     <div class="content" id="about">
       <h2>ABOUT</h2>
+      <p>
+        AIbasis was established in 2018 by Ming Lei, one of the founding members of Baidu. AIbasis is a Singapore-based,
+        pre-seed, seed stage fund that focuses on emerging technologies.</p>
+
+      <p>AIbasis has invested in 60+ startups specializing in frontier areas such as Artificial Intellegence, Robotics,
+        SaaS, Biotech, Synthetic Biology, AI Drug Discovery and Renewable Energy. About 90% of our portfolio companies
+        were spun out from or have founders who are alumni of Stanford, MIT, Harvard, Berkeley and other prestigious
+        universities. </p>
+
+      <p> With our technical expertise, large network and years of experience in the technology industry, we support
+        early-stage tech companies and young talents from the ground up. We invite visionary founders to tap into our
+        market insights, resources, and decades of experience to turn ambitious plans into a tangible and successful
+        future.
+      </p>
     </div>
     <div class="content" id="team">
       <h2>TEAM</h2>
@@ -94,7 +111,6 @@ onUnmounted(() => {
 .navbar-anchor {
   height: 102px;
   padding: 0 360px;
-  background: rgba(0,0,0,0.5);
   position: fixed;
   top: 0;
   left: 0;
@@ -106,6 +122,7 @@ onUnmounted(() => {
   .logo {
     width: 135px;
     height: 36px;
+    cursor: pointer;
   }
 
   .navbar-anchor-list {
@@ -114,21 +131,36 @@ onUnmounted(() => {
 
     .navbar-anchor-item {
       margin-left: 60px;
-      color: rgba(255, 255, 255, 0.5);
+      color: #ffffff;
+      font-size: 20px;
+      position: relative;
+      padding-bottom: 8px;
 
       &:first-child {
         margin-left: 0;
       }
 
-      &.active {
-        color: rgba(255, 255, 255, 1);
+      .under_line {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        margin-left: -10.5px;
+        width: 21px;
+        height: 3px;
+        background: #ffffff;
+        &.under_line_dark {
+          background: #4E62E8;
+        }
       }
+    }
+  }
 
-      .navbar-anchor-item-text {
+  &.navbar-anchor_dark {
+    background: #ffffff;
+    box-shadow: 0px 10px 30px 0px rgba(31, 32, 36, 0.1);
 
-        font-size: 20px;
-
-      }
+    .navbar-anchor-item {
+      color: #212226;
     }
   }
 }
@@ -139,17 +171,32 @@ onUnmounted(() => {
     padding: 0 360px;
     text-align: center;
     overflow: hidden;
+
     h2 {
       display: block;
       margin-top: 100px;
     }
-  }
 
-  #home {
-    height: auto;
-    padding: 0;
-    .banner {
-      width: 100%;
+    &#home {
+      height: auto;
+      padding: 0;
+
+      .banner {
+        width: 100%;
+      }
+    }
+
+    &#about {
+      p {
+        text-align: left;
+        font-size: 20px;
+        font-family: HelveticaNeue-Light, HelveticaNeue;
+        font-weight: 300;
+        color: #212226;
+        line-height: 32px;
+        margin-top: 32px;
+      }
     }
   }
-}</style>
+}
+</style>
