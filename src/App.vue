@@ -55,6 +55,10 @@ const personClick = (index) => {
   personIndex = index;
 }
 
+const getImageUrl = (name) => {
+  return new URL(`./assets/${name}.png`, import.meta.url).href
+}
+
 onMounted(() => {
   setOffsetTopList()
   window.onresize = () => {
@@ -75,7 +79,7 @@ onUnmounted(() => {
 </script>
 <template>
   <div v-if="!isMobile" class="navbar-anchor" :class="{ 'navbar-anchor_dark': changeNav }">
-    <img class="logo" :src="`/src/assets/logo${changeNav ? '_dark' : ''}.png`" @click="anchorPosition('#home')" />
+    <img class="logo" :src="getImageUrl(`logo${changeNav ? '_dark' : ''}`)" @click="anchorPosition('#home')" />
     <ul class="navbar-anchor-list">
       <li class="navbar-anchor-item" v-for="(item, index) in navbarStore.anchorList" :key="index"
         @click="anchorPosition(item.anchor)">
@@ -88,7 +92,7 @@ onUnmounted(() => {
   </div>
   <div class="main-container" :class="{ 'main-container-mobile': isMobile }" id="main">
     <div class="content" id="home">
-      <img class="banner" :src="isMobile ? '/src/assets/mobile/mobile_banner.png' : '/src/assets/banner.png'" />
+      <img class="banner" :src="getImageUrl(isMobile ? 'mobile_banner' : 'banner')" />
     </div>
     <div class="content" id="about">
       <div class="title">
@@ -117,7 +121,7 @@ onUnmounted(() => {
       </div>
       <div class="persons">
         <div v-for="(item, index) in teamStore.teamData" :key="index" class="person" @click="personClick(index)">
-          <img :src="`/src/assets/team_${index + 1}.png`" />
+          <img :src="getImageUrl(`team_${index + 1}`)" />
           <div class="info">
             <span class="name">{{ item.name }}</span>
             <span class="position">{{ item.position }}</span>
@@ -135,10 +139,10 @@ onUnmounted(() => {
         <div class="title_line"></div>
       </div>
       <div class="imgs">
-        <img src="@/assets/portfolio_1.png" />
-        <img src="@/assets/portfolio_2.png" />
-        <img src="@/assets/portfolio_3.png" />
-        <img src="@/assets/portfolio_4.png" />
+        <img src="./assets/portfolio_1.png" />
+        <img src="./assets/portfolio_2.png" />
+        <img src="./assets/portfolio_3.png" />
+        <img src="./assets/portfolio_4.png" />
       </div>
     </div>
     <div class="content" id="cooperation">
@@ -146,7 +150,7 @@ onUnmounted(() => {
         <h2>COOPERATION</h2>
         <div class="title_line"></div>
       </div>
-      <img :src="isMobile ? '/src/assets/mobile/mobile_cooperation.png' : '/src/assets/cooperation.png'" />
+      <img :src="getImageUrl(isMobile ? 'mobile_cooperation' : 'cooperation')" />
     </div>
   </div>
   <div class="footer" :class="{ 'footer-mobile': isMobile }">
@@ -168,7 +172,7 @@ onUnmounted(() => {
       <div class="close" @click="showDialog = false"></div>
       <div class="head">
         <div class="pic">
-          <img :src="`/src/assets/team_${personIndex + 1}.png`" />
+          <img :src="getImageUrl(`team_${personIndex + 1}`)" />
         </div>
         <span class="name">{{ teamStore.teamData[personIndex].name }}</span>
         <span class="position">{{ teamStore.teamData[personIndex].position }}</span>
@@ -662,7 +666,7 @@ $mainContentPaddingMobile: 0 100px;
     .close {
       width: 213px;
       height: 213px;
-      background: url('@/assets/mobile/close.png');
+      background: url('./assets/close.png');
       background-size: 100%;
       position: absolute;
       top: 100px;
