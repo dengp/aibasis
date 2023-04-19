@@ -44,9 +44,6 @@ const scrollHandle = ({ target }) => {
   }
 }
 
-const bannerLoaded = () => {
-  setOffsetTopList();
-}
 
 onMounted(() => {
   setOffsetTopList()
@@ -76,7 +73,7 @@ onUnmounted(() => {
   </div>
   <div class="main-container" id="main">
     <div class="content" id="home">
-      <img class="banner" src="@/assets/banner.png" @load="bannerLoaded()" />
+      <img class="banner" src="@/assets/banner.png" />
     </div>
     <div class="content" id="about">
       <h2>ABOUT</h2>
@@ -216,7 +213,8 @@ $mainContentPadding: 0 360px;
       height: auto;
       padding: 0;
       .banner {
-        width: 100%;
+        width: 1920px;
+        height: 701px;
       }
     }
 
@@ -274,7 +272,8 @@ $mainContentPadding: 0 360px;
     &#cooperation {
       margin-top: 100px;
       img {
-        width: 100%;
+        width: 1200px;
+        height: 308px;
         margin: 100px 0 130px 0;
       }
     }
