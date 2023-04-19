@@ -43,9 +43,9 @@ export const useNavbarStore = defineStore({
         behavior: 'instant'
       })
     },
-    anchorPosition(anchor) {
+    anchorPosition(anchor, isMobile) {
       const element = document.querySelector(anchor)
-      const navHeight = document.querySelector('.navbar-anchor').offsetHeight
+      const navHeight = isMobile ? 0 : document.querySelector('.navbar-anchor').offsetHeight
       this.scrollTo(anchor == '#home' ? 0 : (element.offsetTop - navHeight))
     }
   }
