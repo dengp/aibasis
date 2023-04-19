@@ -1,8 +1,10 @@
 <script setup>
 import { useNavbarStore } from '@/store/modules/navbar'
+import { useTeamStore } from '@/store/modules/team.js'
 import { onMounted, onUnmounted } from 'vue'
 
 const navbarStore = useNavbarStore()
+const teamStore = useTeamStore()
 
 const anchorPosition = anchor => {
   navbarStore.anchorPosition(anchor)
@@ -96,13 +98,18 @@ onUnmounted(() => {
     <div class="content" id="team">
       <h2>TEAM</h2>
       <div class="title_under_line"></div>
-      <div class="imgs">
-        <img src="@/assets/team_1.png" />
-        <img src="@/assets/team_2.png" />
-        <img src="@/assets/team_3.png" />
-        <img src="@/assets/team_4.png" />
-        <img src="@/assets/team_5.png" />
-        <img src="@/assets/team_6.png" />
+      <div class="persons">
+        <div v-for="(item, index) in teamStore.teamData" :key="index" class="person">
+          <img :src="`/src/assets/team_${index + 1}.png`" />
+          <div class="info">
+            <span class="name">{{ item.name }}</span>
+            <span class="position">{{ item.position }}</span>
+          </div>
+          <div class="intro">
+            <span class="name">{{ item.name }}</span>
+            <span class="con">{{ item.intro }}</span>
+          </div>
+        </div>
       </div>
     </div>
     <div class="content" id="portfolio">
@@ -140,6 +147,7 @@ $mainContentPadding: 0 360px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 1;
 
   .logo {
     width: 135px;
@@ -236,18 +244,77 @@ $mainContentPadding: 0 360px;
 
     &#team {
       padding-top: 120px;
-      .imgs {
+      .persons {
         margin-top: 49px;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         align-content: center;
-        img {
-          width: 262px;
-          height: 182px;
-          width: 380px;
-          height: 380px;
+        .person {
+          position: relative;
           margin-top: 30px;
+          img {
+            width: 380px;
+            height: 380px;
+          }
+          .info {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .name {
+              font-size: 48px;
+              font-family: 'HelveticaNeue-Bold, HelveticaNeue';
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 48px;
+            }
+            .position {
+              font-size: 16px;
+              font-family: 'PingFangSCSemibold-, PingFangSCSemibold';
+              font-weight: normal;
+              color: #FFFFFF;
+              line-height: 16px;
+              margin-top: 10px;
+            }
+          }
+          .intro {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #4E62E8;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+            justify-content: center;
+            opacity: 0;
+            .name {
+              font-size: 48px;
+              font-family: 'HelveticaNeue-Bold, HelveticaNeue';
+              font-weight: bold;
+              color: #FFFFFF;
+              line-height: 48px;
+            }
+            .con {
+              font-size: 15px;
+              font-family: 'HelveticaNeue';
+              color: #FFFFFF;
+              line-height: 22px;
+              margin-top: 26px;
+            }
+          }
+          &:hover {
+            .intro {
+              opacity: 1;
+            }
+          }
         }
       }
     }

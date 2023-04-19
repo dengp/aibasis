@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 
 export const useNavbarStore = defineStore({
-  id: 'navbar', // id必填，且需要唯一
+  id: 'navbar',
   state: () => {
     return {
       anchorList: [
