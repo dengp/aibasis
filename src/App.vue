@@ -50,7 +50,7 @@ const scrollHandle = ({ target }) => {
 }
 
 const personClick = (index) => {
-  if (!isMobile) return;
+  if (!isMobile || teamStore.teamData[index].mobileIntro.length == 0) return;
   showDialog.value = true;
   personIndex = index;
 }
@@ -121,14 +121,14 @@ onUnmounted(() => {
       </div>
       <div class="persons">
         <div v-for="(item, index) in teamStore.teamData" :key="index" class="person" @click="personClick(index)">
-          <img :src="getImageUrl(`team_${index + 1}`)" />
+          <img :src="getImageUrl(item.pic)" />
           <div class="info">
             <span class="name">{{ item.name }}</span>
             <span class="position">{{ item.position }}</span>
           </div>
           <div class="intro" v-if="!isMobile">
             <span class="name">{{ item.name }}</span>
-            <span class="con">{{ item.intro }}</span>
+            <span class="con">{{ item.position }}</span>
           </div>
         </div>
       </div>
@@ -380,7 +380,7 @@ $mainContentPaddingMobile: 0 100px;
 
           &:hover {
             .intro {
-              opacity: 1;
+              opacity: 0;
             }
           }
         }
